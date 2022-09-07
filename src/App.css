@@ -1,0 +1,81 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 35vmin;
+  pointer-events: none;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  padding: 0 20px;
+}
+
+.App-header h1 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.App-form {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+.App-form input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 20px;
+}
+
+.App-form label {
+  width: 100%;
+  display: block;
+  padding-bottom: 15px;
+}
+
+.App-calc {
+  min-height: 112px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.App-calc h2{
+  font-size: 60px;
+  margin: 0;
+}
+
+.App-calc h3 {
+  font-size: 22px;
+}
+
+.App-calc small {
+  width: 100%;
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
