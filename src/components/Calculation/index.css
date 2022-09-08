@@ -1,0 +1,19 @@
+.Calculation-display {
+    margin: 20px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.Calculation-display h2 {
+    margin: 0;
+}
+
+.Calculation-input {
+    text-align: left;
+    padding: 10px 0;
+}
+
+
+.Calculation input {
+    width: 100%;
+}

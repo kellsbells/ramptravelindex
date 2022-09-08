@@ -1,70 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from './cjg-logo.jpeg';
+import { Calculation } from './components/Calculation';
+import { Leaderboard } from './components/Leaderboard';
 import './App.css';
 
 function App() {
 
-  const [ distance, setDistance ] = useState(0);
-  const [ wheelbase, setWheelbase ] = useState(0);
-  const [ calculation, setCalculation ] = useState(0);
+  const [ rankings, setRankings ] = useState([]);
 
-  const handleInput = (event) => {
-    let theDistance = distance;
-    let theWheelbase = wheelbase;
+  useEffect(() => {
+    if(!localStorage.getItem("leaderboard")){
+      localStorage.setItem("leaderboard", JSON.stringify([]))
+    }
+    setRankings(JSON.parse(localStorage.getItem("leaderboard")))
+  }, []);
 
+  const addToLeaderboard = (description, calculation) => {
+    const entry = {}
+    entry.description = description;
+    entry.calculation = calculation;
 
-    if (event.target.name === 'distance'){
-      theDistance = event.target.value;
-      setDistance(theDistance)
-    }
-    if(event.target.name === 'wheelbase'){
-      theWheelbase = event.target.value;
-      setWheelbase(theWheelbase);
-    }
-    
-    if(distance && wheelbase){
-      setCalculation(Math.floor(theDistance / theWheelbase * 1000));
-    }
-  }
+    const leaderboardData = JSON.parse(localStorage.getItem("leaderboard"));
+    leaderboardData.push(entry);
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboardData));
 
-  const clearInput = (event) => {
-    if (event.target.name === 'distance') {
-      setDistance('')
-    }
-    if (event.target.name === 'wheelbase') {
-      setWheelbase('')
-    }
-    setCalculation(0);
+    setRankings(leaderboardData)
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h1>Ramp Travel Index Calculator</h1>
       </header>
       <main>
-        <form className="App-form">
-          <label>
-            Wheelbase (in):
-            <input type="number" name="wheelbase" value={wheelbase} onSelect={clearInput} onChange={handleInput} />
-          </label>
-          <label>
-            Distance (in):
-            <input type="number" name="distance" value={distance} onSelect={clearInput} onChange={handleInput}/>
-          </label>
-        </form>
-        <div className="App-calc">
-          {calculation > 0 &&
-            <>
-              <h2>{calculation}</h2>
-              <small>Your RTI score based on a 20 degree ramp</small>
-            </>
-          }
-          {calculation === 0 &&
-            <h3>Fill out form to retrieve RTI calculation</h3>
-          }
-        </div>
+        <Calculation addToLeaderboard={addToLeaderboard} />
+        <Leaderboard rankings={rankings} />
       </main>
     </div>
   );
