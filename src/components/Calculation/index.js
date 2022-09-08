@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import logo from '../../cjg-logo.jpeg';
 import './index.css';
 
 export function Calculation ({addToLeaderboard}) {
